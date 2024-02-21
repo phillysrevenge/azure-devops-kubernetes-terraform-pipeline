@@ -20,27 +20,34 @@ stages:
   - job: SecondJob
     steps:
     - script: echo Build SecondJob
-- stage: DevDeploy
-  variables:
-    environment: Dev
-  dependsOn: Build
-  jobs:
-  - job: DevDeployJob
-    steps:
-    - script: echo $(environment)DeployJob
-- stage: QADeploy
-  dependsOn: Build
-  jobs:
-  - job: QADeployJob
-    steps:
-    - script: echo QADeployJob
-- stage: ProdDeploy
-  dependsOn:
-  - DevDeploy
-  - QADeploy
-  jobs:
-    - job: ProdDeployJob
-      steps:
-      - script: echo ProdDeployJob
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: |
+          **/*.yaml
+          **/*.tf
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+# - stage: DevDeploy
+#   variables:
+#     environment: Dev
+#   dependsOn: Build
+#   jobs:
+#   - job: DevDeployJob
+#     steps:
+#     - script: echo $(environment)DeployJob
+# - stage: QADeploy
+#   dependsOn: Build
+#   jobs:
+#   - job: QADeployJob
+#     steps:
+#     - script: echo QADeployJob
+# - stage: ProdDeploy
+#   dependsOn:
+#   - DevDeploy
+#   - QADeploy
+#   jobs:
+#     - job: ProdDeployJob
+#       steps:
+#       - script: echo ProdDeployJob
 
 
