@@ -16,15 +16,18 @@ stages:
   - job: FirstJob
     steps:
     - script: echo Build FirstJob
+    - script: echo $(PipelineLevelVariable)
   - job: SecondJob
     steps:
     - script: echo Build SecondJob
 - stage: DevDeploy
+  variables:
+    environment: Dev
   dependsOn: Build
   jobs:
   - job: DevDeployJob
     steps:
-    - script: echo DevDeployJob
+    - script: echo $(environment)DeployJob
 - stage: QADeploy
   dependsOn: Build
   jobs:
