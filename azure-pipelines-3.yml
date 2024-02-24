@@ -7,22 +7,21 @@ trigger:
 - main
 
 pool:
-  name: Default
   vmImage: ubuntu-latest
 
 steps:
 - script: echo $(System.DefaultWorkingDirectory) !
   displayName: 'Run a one-line script'
-- script: git clone https://github.com/phillysrevenge/azure-devops-kubernetes-terraform-pipeline.git 
-  displayName: 'Clone Repo'
-- script: dir 
-  displayName: 'list directory'
-- script: |   
-    terraform --version 
-  displayName: 'terraform version'
-- script: |   
-    cd configuration/iaac/azure/kubernetes
-  displayName: 'terraform installation'
+# - script: git clone https://github.com/phillysrevenge/azure-devops-kubernetes-terraform-pipeline.git 
+#   displayName: 'Clone Repo'
+# - script: dir 
+#   displayName: 'list directory'
+# - script: |   
+#     terraform --version 
+#   displayName: 'terraform version'
+# - script: |   
+#     cd configuration/iaac/azure/kubernetes
+#   displayName: 'terraform installation'
 - task: DownloadSecureFile@1
   name: publickey
   inputs:
@@ -30,6 +29,7 @@ steps:
 - task: TerraformCLI@2
   inputs:
     command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
     commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
     backendType: 'azurerm'
     backendServiceArm: 'Azure-resource-manager-service-connection'
