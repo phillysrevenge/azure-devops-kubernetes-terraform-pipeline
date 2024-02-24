@@ -15,7 +15,7 @@ steps:
   displayName: 'Run a one-line script'
 - script: git clone https://github.com/phillysrevenge/azure-devops-kubernetes-terraform-pipeline.git 
   displayName: 'Clone Repo'
-- script: ls 
+- script: dir 
   displayName: 'list directory'
 
 - task: DownloadSecureFile@1
