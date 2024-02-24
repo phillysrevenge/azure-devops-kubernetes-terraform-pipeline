@@ -22,8 +22,6 @@ steps:
   displayName: 'terraform version'
 - script: |   
     cd configuration/iaac/azure/kubernetes
-    # terraform init
-    # terraform plan
   displayName: 'terraform installation'
 - task: DownloadSecureFile@1
   name: publickey
@@ -32,7 +30,6 @@ steps:
 - task: TerraformCLI@2
   inputs:
     command: 'init'
-    # workingDirectory: 'configuration/iaac/azure/kubernetes'
     commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
     backendType: 'azurerm'
     backendServiceArm: 'Azure-resource-manager-service-connection'
