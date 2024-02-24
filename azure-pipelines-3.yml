@@ -13,6 +13,11 @@ pool:
 steps:
 - script: echo $(System.DefaultWorkingDirectory) !
   displayName: 'Run a one-line script'
+- script: git clone https://github.com/phillysrevenge/azure-devops-kubernetes-terraform-pipeline.git 
+  displayName: 'Clone Repo'
+- script: ls 
+  displayName: 'list directory'
+
 - task: DownloadSecureFile@1
   name: publickey
   inputs:
