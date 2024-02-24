@@ -8,10 +8,13 @@ trigger:
 
 pool:
   vmImage: ubuntu-latest
+  name: Default
+variables:
+- group: phillypractice
 
 steps:
-- script: echo $(System.DefaultWorkingDirectory) !
-  displayName: 'Run a one-line script'
+- script: echo $(myvariable) !
+  displayName: 'variable group'
 # - script: git clone https://github.com/phillysrevenge/azure-devops-kubernetes-terraform-pipeline.git 
 #   displayName: 'Clone Repo'
 # - script: dir 
@@ -22,21 +25,21 @@ steps:
 # - script: |   
 #     cd configuration/iaac/azure/kubernetes
 #   displayName: 'terraform installation'
-- task: DownloadSecureFile@1
-  name: publickey
-  inputs:
-    secureFile: 'azure_rsa.pub'
-- task: TerraformCLI@2
-  inputs:
-    command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
-    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
-    backendType: 'azurerm'
-    backendServiceArm: 'Azure-resource-manager-service-connection'
-    ensureBackend: true
-    backendAzureRmResourceGroupName: 'terraform-backend-rg'
-    backendAzureRmResourceGroupLocation: 'westeurope'
-    backendAzureRmStorageAccountName: 'phillysrevengestorageacct'
-    backendAzureRmContainerName: 'phillysrevengestorageacctcontainer'
-    backendAzureRmKey: 'kubernetes-dev.tfstate'
-    allowTelemetryCollection: true
+# - task: DownloadSecureFile@1
+#   name: publickey
+#   inputs:
+#     secureFile: 'azure_rsa.pub'
+# - task: TerraformCLI@2
+#   inputs:
+#     command: 'init'
+#     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
+#     commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
+#     backendType: 'azurerm'
+#     backendServiceArm: 'Azure-resource-manager-service-connection'
+#     ensureBackend: true
+#     backendAzureRmResourceGroupName: 'terraform-backend-rg'
+#     backendAzureRmResourceGroupLocation: 'westeurope'
+#     backendAzureRmStorageAccountName: 'phillysrevengestorageacct'
+#     backendAzureRmContainerName: 'phillysrevengestorageacctcontainer'
+#     backendAzureRmKey: 'kubernetes-dev.tfstate'
+#     allowTelemetryCollection: true
