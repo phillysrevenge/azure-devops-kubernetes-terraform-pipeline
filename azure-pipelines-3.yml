@@ -17,11 +17,13 @@ steps:
   displayName: 'Clone Repo'
 - script: dir 
   displayName: 'list directory'
-- script: |  
-    wget https://releases.hashicorp.com/terraform/1.1.0/terraform_1.1.0_linux_amd64.zip     
-    unzip terraform_1.1.0_linux_amd64.zip     
-    sudo mv terraform /usr/local/bin/     
+- script: |   
     terraform --version 
+  displayName: 'terraform version'
+- script: |   
+    cd configuration/iaac/azure/kubernetes
+    terraform init
+    terraform plan
   displayName: 'terraform installation'
 - task: DownloadSecureFile@1
   name: publickey
