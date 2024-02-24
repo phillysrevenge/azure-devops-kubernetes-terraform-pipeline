@@ -11,7 +11,7 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
+- script: echo $(Build.SourcesDirectory) !
   displayName: 'Run a one-line script'
 - task: DownloadSecureFile@1
   name: publickey
@@ -20,7 +20,7 @@ steps:
 - task: TerraformCLI@2
   inputs:
     command: 'init'
-    workingDirectory: 'github.com/phillysrevenge/azure-devops-kubernetes-terraform-pipeline/blob/main/configuration/iaac/azure/kubernetes'
+    workingDirectory: '$(Build.SourcesDirectory)'
     commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
     backendType: 'azurerm'
     backendServiceArm: 'Azure-resource-manager-service-connection'
