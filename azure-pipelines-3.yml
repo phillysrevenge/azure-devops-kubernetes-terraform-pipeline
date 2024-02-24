@@ -30,14 +30,6 @@ steps:
     cd configuration/iaac/azure/kubernetes
     terraform init
     terraform plan
-    backendType: 'azurerm'
-    backendServiceArm: 'Azure-resource-manager-service-connection'
-    ensureBackend: true
-    backendAzureRmResourceGroupName: 'terraform-backend-rg'
-    backendAzureRmResourceGroupLocation: 'westeurope'
-    backendAzureRmStorageAccountName: 'phillysrevengestorageacct'
-    backendAzureRmContainerName: 'phillysrevengestorageacctcontainer'
-    backendAzureRmKey: 'kubernetes-dev.tfstate'
     allowTelemetryCollection: true
   displayName: 'terraform installation'
 
