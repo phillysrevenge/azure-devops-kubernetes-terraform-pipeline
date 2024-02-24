@@ -17,22 +17,27 @@ steps:
   displayName: 'Clone Repo'
 - script: dir 
   displayName: 'list directory'
-
+- script: |  
+    wget https://releases.hashicorp.com/terraform/1.1.0/terraform_1.1.0_linux_amd64.zip     
+    unzip terraform_1.1.0_linux_amd64.zip     
+    sudo mv terraform /usr/local/bin/     
+    terraform --version 
+  displayName: 'terraform installation'
 - task: DownloadSecureFile@1
   name: publickey
   inputs:
     secureFile: 'azure_rsa.pub'
-- task: TerraformCLI@2
-  inputs:
-    command: 'init'
-    workingDirectory: 'configuration/iaac/azure/kubernetes'
-    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
-    backendType: 'azurerm'
-    backendServiceArm: 'Azure-resource-manager-service-connection'
-    ensureBackend: true
-    backendAzureRmResourceGroupName: 'terraform-backend-rg'
-    backendAzureRmResourceGroupLocation: 'westeurope'
-    backendAzureRmStorageAccountName: 'phillysrevengestorageacct'
-    backendAzureRmContainerName: 'phillysrevengestorageacctcontainer'
-    backendAzureRmKey: 'kubernetes-dev.tfstate'
-    allowTelemetryCollection: true
+# - task: TerraformCLI@2
+#   inputs:
+#     command: 'init'
+#     workingDirectory: 'configuration/iaac/azure/kubernetes'
+#     commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
+#     backendType: 'azurerm'
+#     backendServiceArm: 'Azure-resource-manager-service-connection'
+#     ensureBackend: true
+#     backendAzureRmResourceGroupName: 'terraform-backend-rg'
+#     backendAzureRmResourceGroupLocation: 'westeurope'
+#     backendAzureRmStorageAccountName: 'phillysrevengestorageacct'
+#     backendAzureRmContainerName: 'phillysrevengestorageacctcontainer'
+#     backendAzureRmKey: 'kubernetes-dev.tfstate'
+#     allowTelemetryCollection: true
