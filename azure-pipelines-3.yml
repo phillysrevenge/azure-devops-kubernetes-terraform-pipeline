@@ -22,24 +22,24 @@ steps:
   displayName: 'terraform version'
 - script: |   
     cd configuration/iaac/azure/kubernetes
-    terraform init
-    terraform plan
+    # terraform init
+    # terraform plan
   displayName: 'terraform installation'
 - task: DownloadSecureFile@1
   name: publickey
   inputs:
     secureFile: 'azure_rsa.pub'
-# - task: TerraformCLI@2
-#   inputs:
-#     command: 'init'
-#     workingDirectory: 'configuration/iaac/azure/kubernetes'
-#     commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
-#     backendType: 'azurerm'
-#     backendServiceArm: 'Azure-resource-manager-service-connection'
-#     ensureBackend: true
-#     backendAzureRmResourceGroupName: 'terraform-backend-rg'
-#     backendAzureRmResourceGroupLocation: 'westeurope'
-#     backendAzureRmStorageAccountName: 'phillysrevengestorageacct'
-#     backendAzureRmContainerName: 'phillysrevengestorageacctcontainer'
-#     backendAzureRmKey: 'kubernetes-dev.tfstate'
-#     allowTelemetryCollection: true
+- task: TerraformCLI@2
+  inputs:
+    command: 'init'
+    # workingDirectory: 'configuration/iaac/azure/kubernetes'
+    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
+    backendType: 'azurerm'
+    backendServiceArm: 'Azure-resource-manager-service-connection'
+    ensureBackend: true
+    backendAzureRmResourceGroupName: 'terraform-backend-rg'
+    backendAzureRmResourceGroupLocation: 'westeurope'
+    backendAzureRmStorageAccountName: 'phillysrevengestorageacct'
+    backendAzureRmContainerName: 'phillysrevengestorageacctcontainer'
+    backendAzureRmKey: 'kubernetes-dev.tfstate'
+    allowTelemetryCollection: true
