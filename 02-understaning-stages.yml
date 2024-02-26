@@ -7,7 +7,6 @@ trigger:
 - main
 
 pool:
-  name: Default
   vmImage: ubuntu-latest
 
 stages:
@@ -17,21 +16,21 @@ stages:
     steps:
     - script: echo Build FirstJob
     - script: echo $(PipelineLevelVariable)
-  - job: SecondJob
-    steps:
-    - script: echo Build SecondJob
-    - task: CopyFiles@2
-      inputs:
-        SourceFolder: '$(System.DefaultWorkingDirectory)'
-        Contents: |
-          **/*.yaml
-          **/*.tf
-        TargetFolder: '$(Build.ArtifactStagingDirectory)'
-    - task: PublishBuildArtifacts@1
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'drop'
-        publishLocation: 'Container'
+  # - job: SecondJob
+  #   steps:
+  #   - script: echo Build SecondJob
+  #   - task: CopyFiles@2
+  #     inputs:
+  #       SourceFolder: '$(System.DefaultWorkingDirectory)'
+  #       Contents: |
+  #         **/*.yaml
+  #         **/*.tf
+  #       TargetFolder: '$(Build.ArtifactStagingDirectory)'
+  #   - task: PublishBuildArtifacts@1
+  #     inputs:
+  #       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+  #       ArtifactName: 'drop'
+  #       publishLocation: 'Container'
 # - stage: DevDeploy
 #   variables:
 #     environment: Dev

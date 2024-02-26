@@ -30,7 +30,6 @@ steps:
     cd configuration/iaac/azure/kubernetes
     terraform init
     terraform plan
-    allowTelemetryCollection: true
   displayName: 'terraform installation'
 
 # - task: TerraformCLI@2
