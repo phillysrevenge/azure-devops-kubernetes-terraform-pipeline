@@ -39,20 +39,13 @@ resource "azurerm_kubernetes_cluster" "terraform-k8s" {
   }
 }
 
-# terraform {
-#   backend "azurerm" {
-#     # storage_account_name="<<storage_account_name>>" #OVERRIDE in TERRAFORM init
-#     # access_key="<<storage_account_key>>" #OVERRIDE in TERRAFORM init
-#     # key="<<env_name.k8s.tfstate>>" #OVERRIDE in TERRAFORM init
-#     # container_name="<<storage_account_container_name>>" #OVERRIDE in TERRAFORM init okay
-#   }
-# }
 terraform {
   backend "azurerm" {
-    resource_group_name  = "terraform-backend-rg"
-    storage_account_name = "phillysrevengestorageacct"
-    container_name       = "phillysrevengestorageacctcontainer"
-    key                  = "kubernetes-dev.tfstate"
+    # storage_account_name="<<storage_account_name>>" #OVERRIDE in TERRAFORM init
+    # access_key="<<storage_account_key>>" #OVERRIDE in TERRAFORM init
+    # key="<<env_name.k8s.tfstate>>" #OVERRIDE in TERRAFORM init
+    # container_name="<<storage_account_container_name>>" #OVERRIDE in TERRAFORM init okay
   }
 }
+
 
