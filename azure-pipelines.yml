@@ -20,12 +20,14 @@ stages:
 - stage: QA
   jobs:
   - job: QAJob
+    dependsOn: BuildJob
     steps:
     - script: echo Hello, world!
     displayName: 'Run a one-line script'
 - stage: Prod
   jobs:
   - job: ProdJob
+    dependsOn: QAJob
     steps:
     - script: |
         echo Add other tasks to build, test, and deploy your project.
