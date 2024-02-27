@@ -23,6 +23,11 @@ stages:
     steps:
     - script: echo QAJob!
     displayName: 'QA'
+- stage: Dev
+  jobs:
+  - job: DevJob
+    steps:
+    - script: echo Dev Job!
 - stage: Prod
   dependsOn: Build
   jobs:
