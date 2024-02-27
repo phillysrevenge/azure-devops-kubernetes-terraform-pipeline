@@ -16,17 +16,17 @@ stages:
     - script: |
         echo $(system.DefaultWorkingDirectory)
         echo in Build environment
-    displayName: 'QA'
+    displayName: 'Build'
 - stage: QA
   jobs:
   - job: QAJob
     steps:
-    - script: echo Hello, world!
-    displayName: 'Run a one-line script'
+    - script: QAJob!
+    displayName: 'QA'
 - stage: Prod
+  dependsOn: Build
   jobs:
   - job: ProdJob
-    dependsOn: QAJob
     steps:
     - script: |
         echo Add other tasks to build, test, and deploy your project.
