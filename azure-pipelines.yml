@@ -21,7 +21,7 @@ stages:
   jobs:
   - job: QAJob
     steps:
-    - script: QAJob!
+    - script: echo QAJob!
     displayName: 'QA'
 - stage: Prod
   dependsOn: Build
